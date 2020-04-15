@@ -1,0 +1,57 @@
+openapi: 3.0.0
+info:
+  version: "1.0.0"
+  title: "Koana Weather Alerts v1"
+  description: "Weather alerts from KIWA – Koana Island Weather Authority"
+
+paths:
+  /alerts:
+    get:
+      parameters:
+        - name: addressLocality
+          in: query
+          description: >
+            Returns the weather at a given locality, or 404-not found if the locality isn't known.
+          schema:
+            type: string
+            example: Var
+          x-profile: "http://supermodel.io/superface/weather/profile/WeatherAlerts#RetrieveAlert/addressLocality"
+
+      responses:
+        "200":
+          description: >
+            Weather alerts for the given locality
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  title:
+                    type: string
+                    x-profile: "http://supermodel.io/superface/weather/profile/WeatherAlerts#title"
+
+                  description:
+                    type: string
+                    x-profile: "http://supermodel.io/superface/weather/profile/WeatherAlerts#description"
+
+                  severity:
+                    type: string
+                    x-profile: "http://supermodel.io/superface/weather/profile/WeatherAlerts#severity"
+
+                  startDate:
+                    type: string
+                    x-profile: "http://supermodel.io/superface/weather/profile/WeatherAlerts#startDate"
+
+                  endDate:
+                    type: string
+                    x-profile: "http://supermodel.io/superface/weather/profile/WeatherAlerts#endDate"
+
+                example:
+                  title: Thunderstorms
+                  description: >
+                    Heavy rainfall may affect human activities...
+                  severity: advisory
+                  startDate: "2019-12-9T16:24:08Z"
+                  endDate: "2019-11-14T16:24:08Z"
+
+      x-profile: "http://supermodel.io/superface/weather/profile/WeatherAlerts#RetrieveAlert"
